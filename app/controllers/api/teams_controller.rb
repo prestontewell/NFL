@@ -7,13 +7,18 @@ class Api::TeamsController < ApplicationController
 
   def create
     @team = Team.new(
-        club: "Indianapolis Colts",
-        city: "Indianapolis, Indiana",
-        stadium: "Lucas Oil Stadium",
-        capacity: "67,000",
-        founded: "1953"
+        club: params[:club],
+        city: params[:city],
+        stadium: params[:stadium],
+        capacity: params[:capacity],
+        founded: params[:founded]
     )
     @team.save
+    render 'show.json.jbuilder'
+  end
+
+  def show
+    @team = Team.find(params[:id])
     render 'show.json.jbuilder'
   end
 
